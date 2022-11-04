@@ -2,7 +2,6 @@ package com.example.notes.adapter
 
 import android.content.Context
 import android.os.Build
-import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,14 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notes.Models.Note
 import com.example.notes.R
 import kotlin.random.Random
 
 class NotesAdapter(private val context: Context,val listener:NotesClickListener):RecyclerView.Adapter<NotesAdapter.NoteViewHolder> (){
 
-    private val NotesList = ArrayList<com.example.notes.Models.Note>()
-    private val fullList  = ArrayList<com.example.notes.Models.Note>()
+    private val NotesList = ArrayList<Note>()
+    private val fullList  = ArrayList<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
 
@@ -48,10 +48,9 @@ class NotesAdapter(private val context: Context,val listener:NotesClickListener)
        return NotesList.size
     }
 
-    fun updateList(newsList:List<com.example.notes.Models.Note>){
+    fun updateList(newsList:List<Note>){
         fullList.clear()
         fullList.addAll(newsList)
-
         NotesList.clear()
         NotesList.addAll(fullList)
         notifyDataSetChanged()
@@ -92,7 +91,7 @@ class NotesAdapter(private val context: Context,val listener:NotesClickListener)
     }
 
     interface NotesClickListener{
-        fun onItemClicked(note:com.example.notes.Models.Note)
-        fun onLongItemClicked(note: com.example.notes.Models.Note,cardView: CardView)
+        fun onItemClicked(note:Note)
+        fun onLongItemClicked(note: Note,cardView: CardView)
     }
 }
